@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 
 import classes from './auth-form.module.css';
 
-async function createUser(email, password) {
+const createUser = async (email, password) => {
 	const response = await fetch('/api/auth/signup', {
 		method: 'POST',
 		body: JSON.stringify({ email, password }),
@@ -18,19 +18,19 @@ async function createUser(email, password) {
 	}
 
 	return data;
-}
+};
 
-function AuthForm() {
+const AuthForm = () => {
 	const emailInputRef = useRef();
 	const passwordInputRef = useRef();
 
 	const [isLogin, setIsLogin] = useState(true);
 
-	function switchAuthModeHandler() {
+	const switchAuthModeHandler = () => {
 		setIsLogin(prevState => !prevState);
-	}
+	};
 
-	async function submitHandler(event) {
+	const submitHandler = async event => {
 		event.preventDefault();
 
 		const enteredEmail = emailInputRef.current.value;
@@ -48,7 +48,7 @@ function AuthForm() {
 				console.log(error);
 			}
 		}
-	}
+	};
 
 	return (
 		<section className={classes.auth}>
@@ -71,6 +71,6 @@ function AuthForm() {
 			</form>
 		</section>
 	);
-}
+};
 
 export default AuthForm;
